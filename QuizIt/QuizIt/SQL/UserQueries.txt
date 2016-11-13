@@ -1,0 +1,1 @@
+Select * from UserSocial us inner join UserNotes un on us.MessageId

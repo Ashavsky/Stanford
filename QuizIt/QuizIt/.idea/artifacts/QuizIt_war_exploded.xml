@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="QuizIt:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/QuizIt_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="QuizIt/web/Web" />
+      <element id="javaee-facet-resources" facet="QuizIt/web/Web2" />
+    </root>
+  </artifact>
+</component>
