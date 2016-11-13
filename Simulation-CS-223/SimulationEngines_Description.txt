@@ -1,0 +1,108 @@
+Simulation_BiasedCoin
+
+(Combining games) Consider the following three games, called Game A, Game B, and Game C. For
+each game, you start with capital equal to $0 and execute 100 coin tosses. At each toss, you win $1 if
+the coin comes up heads and lose $1 if the coin comes up tails. (Your “winnings” at any point can be
+negative, meaning that you owe the house money.) For Game A, you always toss Coin 1, which comes
+up heads with probability 0.495. (This is clearly a losing game in the long run.) For game B, at each
+toss, you either flip Coin 2, which comes up heads with probability 0.095, or Coin 3, which comes up
+heads with probability 0.745. The coin that you toss depends on your capital, M, just before the toss: if
+M is evenly divisible by 3, then you toss Coin 2, otherwise, you toss Coin 3. Finally, Game C is played
+by randomly switching between Game A and Game B. That is, before each toss of the game we flip a
+fair coin. If this “pre-toss” comes up heads (which it will with probability 0.5), we execute the real toss
+according to the rules of Game A (i.e., we flip Coin 1). Otherwise, we execute the real toss according
+to the rules of Game B (i.e., we flip either Coin 2 or Coin 3, depending on our current capital). Write a
+simulation program to estimate µB and µC, the expected reward from Game B and Game C,
+respectively. (You may use the existing C or Java code for the gamble program as a starting point for
+your own program.)
+a) Based on a trial run of 1000 replications of Game B, determine the number n of repetitions
+required to estimate µB to within ±10% with 99% probability. Using the number n that you have
+obtained, compute a final point estimate and 99% confidence interval for µB based on (at least) n
+replications. Does Game B appear to be a winning or losing game?
+b) Same as above, but now we want to estimate µB to within ±$0.10 with 95% probability.
+c) Repeat the procedure in (a) above, but for Game C. Are the results what you had expected?
+d) In Parts (a) and (c) you computed 99% confidence intervals for µB and µC based on two
+independent simulations. What is the probability that both of the above confidence intervals are
+simultaneously valid? If the two simulations were not independent, show how Bonferroni’s
+inequality (see the Probability and Statistics Refresher handout) could be used to obtain a lower
+bound on the probability of simultaneous validity.
+
+Simulation_HospitalBeds
+
+(Hospital unit) A hospital unit consists of a standard care unit (SCU) containing b1 beds (numbered
+1,2,…,b1) and an intensive care unit (ICU) containing b2 beds (numbered 1,2,…,b2 ). Patients arrive
+according to a renewal process with the successive inter-arrival times i.i.d. as a random variable A
+having probability density function
+f (x;a) = 2x / a2 0 ≤ x ≤ a
+0 otherwise,
+where a is a parameter of the distribution. With probability p, an arrival is an SCU patient, and with
+probability1− p, an arrival is an ICU patient. ICU patients arrive according to a Poisson process with
+a mean interarrival time of α
+2 days. An arrival to the SCU is assigned to the lowest-numbered
+available bed, and similarly for the ICU. If there is no bed available for an arriving patient, the patient
+is immediately rerouted to another hospital and is thus lost from the system. The length of stay for an
+SCU patient (in the absence of a “critical event” as described below) and the length of stay in the ICU
+are distributed as random variables
+LSCU and LICU , respectively, each having a 2-Erlang (λ)
+distribution. Such a random variable is distributed as the sum of two independent exponential random
+variables, each with intensity λ . An SCU patient may experience a “critical event” at some point after
+arrival, at which point the patient becomes an ICU patient, and stays in the ICU for an amount of time
+distributed as
+LICU (i.e., the same as for a freshly arrived ICU patient). The time until a critical event
+for an SCU patient is distributed as a random variable Q having a symmetric triangular distribution on
+the interval [1/2, 3/2]; cf Problem 3 of Assignment #1. If, for a given patient, the critical-event time Q
+exceeds the hospitalization time LSCU, then the patient is released from the hospital without ever
+experiencing a critical event. If an SCU patient experiences a critical event and there are no available
+beds in the ICU, the patient is immediately transferred to another hospital. Define the state of the
+system at time t as
+X (t) = M1(t), M2(t),…, Mb
+1
+(t), N1(t), N2(t),…, Nb
+2
+( (t)) ,
+where M t i( ) 1 = if the ith SCU bed is occupied at time t and M t i( ) 0 = otherwise, and N t i( ) 1 = if
+the ith ICU bed is occupied at time t, and N t i( ) 0 = otherwise. Assume that the hospital unit is
+initially empty
+In terms of the process { ( ) : 0} X t t ≥ , give a precise specification of (i) the expected time until the
+hospital unit (SCU + ICU) first fills up all of its beds, (ii) the expected fraction of time during the
+first thirty days of operation during which there are 7 or more empty beds, (iii) the probability
+that the time until the hospital unit first fills up all of its beds is less than or equal to 55 days, and
+(iv) the expected fraction of patient arrivals in [0, 30] that are immediately transferred to another
+hospital. [Define the fourth performance measure directly in terms of the GSSMC
+{( , ): 0 S C n n n ≥ }, using notions defined in class, such as the nth transition time ζ n , the triggerevent function E s c *( , ) , and so forth. You may also want to use indicator functions.]
+c) Now assume that b =(5,4) , a = 0.08 , E L E L [ ] [ ] 0.25 SCU ICU = = , and p = 0.68. Using the general
+algorithm for simulating GSMPs given in class, estimate the four performance measures from
+part (b) to within ±1% with probability 99%.
+
+Simulation_ServiceSystems
+
+This problem explores the sensitivity of a simulated performance measure to various modeling
+assumptions about the arrival process to a service system, and also introduces a method for modeling
+autocorrelation of interarrival times. Consider a GI/G/1 queue in which the service time distribution is
+symmetric and triangular, taking values in [0, 1.98] and having a mean of 0.99. (All times are in
+minutes.) The performance measure µ of interest is the average number of jobs in the system over the
+interval [0,1000]. Using the GSMP simulation algorithm, write a program that simulates this
+queueing system, assuming an arrival at time 0 to an empty system. Your program should be able to
+estimate µ for the five arrival processes listed below. Use 26,000 repetitions for each arrival process,
+which will allow estimation of µ to within less than ±1% error with 99% probability. Use different
+random numbers for each replication. Give an intuitive explanation of the results that you observe in
+terms of “clumping behavior” of the arriving jobs. The arrival process are
+
+Simulation_MachineReliability
+
+(Machine reliability) A system needs N working machines to be fully operational; if the system is
+functioning with fewer than N working machines it is considered to be in a “degraded” state. To
+guard against system degradation, additional machines are kept available as spares. Whenever a
+machine stops, it is immediately replaced by a spare and is sent to the repair facility, which consists
+of two repairmen who each repair machines one at a time. If N machines are running upon the
+completion of a repair, then the repaired machine becomes available as a spare to be used when the
+need arises; if less than N machines are running upon completion of repair, the repaired machine is
+immediately put into use. The lowest-numbered stopped machine is always selected for repair and,
+similarly, the lowest-numbered spare machine is always selected to be put into use. Whenever both
+repairmen are idle and a machine stops, both repairmen are equally likely to initiate the repair.
+Successive repairs by repairman i ( i =1,2 ) are iid according to a distribution function Gi , and the
+successive times from when a machine starts running until the next failure of the machine are iid
+according to a distribution function H. (Only running machines, and not spares, are subject to failure.)
+There are initially M N ( ) ≥ functional machines, with machines 1 through N running and machines
+N +1 through M available as spares.
+
